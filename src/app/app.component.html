@@ -1,2 +1,12 @@
-<h1>{{title}}</h1>
-<router-outlet></router-outlet>
+<h1>Pokemons</h1>
+<h1>{{ title }}</h1>
+<button (click)="previousPage()">Previous</button>
+<button (click)="nextPage()">Next</button>
+
+<ul>
+  <li *ngFor="let pokemon of pokemons">
+    {{ pokemon.name }}
+  </li>
+</ul>
+<router-outlet>
+</router-outlet>
