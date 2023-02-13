@@ -1,9 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from "./api.service";
+import { Router, ActivatedRoute } from '@angular/router';
 
 class Pokemon {
+  id : number = NaN;
   name: string = "";
   url: string = "";
+  types: string[] = [];
+  height: number = NaN;
 }
 
 @Component({
@@ -12,33 +16,61 @@ class Pokemon {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-  title = 'pokedex';
+  title = "Pokemon API Test";
   pokemons: Pokemon[] = []
-  currentPage = 0;
   limit = 6;
+  page = 1;
 
-  constructor(private apiService: ApiService) { }
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
-      this.getPokemons()
-  }
-
-  getPokemons() {
-    this.apiService.get(this.currentPage * this.limit, this.limit).subscribe(result => {
-      this.pokemons = result.results;
+    this.route.queryParams.subscribe(params => {
+      this.page = +params['page'] || 1;
+      this.loadPokemons();
     });
   }
 
-  nextPage() {
-    this.currentPage++;
-    this.getPokemons();
+  loadPokemons() {
+    this.apiService.get((this.page) * this.limit, this.limit).subscribe(
+      (result: any) => {
+        this.pokemons = result.results.map((pokemon : Pokemon) => {
+          let newPokemon = new Pokemon();
+          newPokemon.name = pokemon.name;
+          newPokemon.url = pokemon.url;
+          newPokemon.id = Number(pokemon.url.split("/")[6]);
+          newPokemon.height = pokemon.height;
+          return newPokemon;
+        });
+      },
+      error => {
+        console.error(error);
+      }
+    );
   }
 
-  previousPage() {
-    if (this.currentPage > 0) {
-      this.currentPage--;
-      this.getPokemons();
-    }
+
+
+  goToPage(page: number) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { page },
+      queryParamsHandling: 'merge'
+    });
+  }
+
+  viewPokemon(pokemon: Pokemon) {
+
+    console.log("POKEMON name: " +  pokemon.name);
+    console.log("POKEMON ID: " +  pokemon.id);
+    this.router.navigate(['/pokemon', pokemon.id]);
+    //this.apiService.getOne(pokemon.id);
+
   }
 
 }
+
+

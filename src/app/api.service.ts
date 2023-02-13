@@ -16,7 +16,8 @@ export class ApiService {
    *
    * @url https://pokeapi.co/docs/v2#resource-listspagination-section
    */
-  get(offset = 0, limit = 6): Observable<any> {
+  get(page = 1, limit = 6) {
+    const offset = (page - 1) * limit;
     return this.http.get(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`);
   }
 

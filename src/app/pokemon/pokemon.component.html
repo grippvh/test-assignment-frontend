@@ -1,0 +1,10 @@
+<div class="container">
+  <p>{{pokemon.name}}</p>
+  <p>Type: {{pokemon.types[0]}}</p>
+  <p>ID: {{pokemon.id}}</p>
+  <p>Height: {{pokemon.height}}</p>
+  <span *ngIf="pokemon.types.length == 2">
+        <b>Type 2:</b> {{pokemon.types[1]}}
+  </span>
+  <!-- some more details -->
+</div>

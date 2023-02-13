@@ -1,12 +1,21 @@
-<h1>Pokemons</h1>
-<h1>{{ title }}</h1>
-<button (click)="previousPage()">Previous</button>
-<button (click)="nextPage()">Next</button>
 
-<ul>
-  <li *ngFor="let pokemon of pokemons">
-    {{ pokemon.name }}
-  </li>
-</ul>
-<router-outlet>
+<h1 style="text-align: center;">{{ title }}</h1>
+<router-outlet style="display: flex; justify-content: center;">
+
+  <ul class="grid-container">
+    <div *ngFor="let pokemon of pokemons" class="grid-item">
+      <img src="/assets/images/poke.jpeg" alt="pokemon picture" width="150" height="150"  />
+      <a [routerLink]="['/pokemon', pokemon.id]" (click)="viewPokemon(pokemon)">{{ pokemon.name }}</a>
+    </div>
+  </ul>
 </router-outlet>
+
+
+
+<div style="text-align: center;">
+  <button (click)="goToPage(page - 1)">Previous</button>
+  &nbsp;
+  <button (click)="goToPage(page + 1)">Next</button>
+</div>
+
+
