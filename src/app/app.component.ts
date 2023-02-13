@@ -66,7 +66,7 @@ export class AppComponent implements OnInit{
 
     console.log("POKEMON name: " +  pokemon.name);
     console.log("POKEMON ID: " +  pokemon.id);
-    this.router.navigate(['/pokemon', pokemon.id]);
+    this.router.navigate(['/pokemon', pokemon.id], { queryParams: { page: this.page } });
     //this.apiService.getOne(pokemon.id);
 
   }
