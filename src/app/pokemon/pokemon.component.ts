@@ -9,19 +9,16 @@ export interface Pokemon {
   url: string;
   imgUrl: string;
   types: string[];
-  height: number
+  height: number,
+  //moves: string[];
+  abilities: string[];
   // add any other properties that the API response includes
 }
 
+
 @Component({
   selector: 'app-pokemon',
-  template: `
-    <div style="text-align: center;">
-      <h2 > {{ pokemon.name | titlecase}}</h2>
-      <img [src]="pokemon.imgUrl" [alt]="pokemon.name + ' picture'" width="150" height="150" />
-      <p>Height: {{ pokemon.height }}</p>
-    </div>
-  `,
+  templateUrl: './pokemon.component.html',
   styleUrls: ['./pokemon.component.scss']
 })
 export class PokemonComponent implements OnInit {
@@ -31,7 +28,9 @@ export class PokemonComponent implements OnInit {
     url : '',
     imgUrl : "/assets/images/poke.jpeg",
     types: [],
-    height: NaN
+    height: NaN,
+    //moves: [],
+    abilities: [],
   };
 
   constructor(private route: ActivatedRoute, private apiService: ApiService, private router: Router) { }
@@ -41,6 +40,8 @@ export class PokemonComponent implements OnInit {
       this.apiService.getOne(params['id']).subscribe(result => {
         this.pokemon = result;
         this.pokemon.imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${params['id']}.png`;
+        //this.pokemon.moves = result.moves.map((move : any) => move.move.name);
+        this.pokemon.abilities = result.abilities.map((ability: any) => ability.ability.name);
       });
     });
   }

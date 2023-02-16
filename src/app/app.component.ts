@@ -8,6 +8,8 @@ class Pokemon {
   url: string = "";
   types: string[] = [];
   height: number = NaN;
+  moves: any[] = [];
+  abilities: any[] = [];
 }
 
 @Component({
@@ -43,6 +45,17 @@ export class AppComponent implements OnInit{
           newPokemon.url = pokemon.url;
           newPokemon.id = Number(pokemon.url.split("/")[6]);
           newPokemon.height = pokemon.height;
+
+          this.apiService.getOne(newPokemon.id).subscribe(
+            (data: any) => {
+              newPokemon.moves = data.moves;
+              newPokemon.abilities = data.abilities;
+            },
+            error => {
+              console.error(error);
+            }
+          );
+
           return newPokemon;
         });
       },

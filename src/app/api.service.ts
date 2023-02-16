@@ -31,4 +31,13 @@ export class ApiService {
   getOne(id: number | string): Observable<any>{
     return this.http.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
   }
+
+  getMoves(id: number): Observable<any> {
+    return this.http.get<any>(`https://pokeapi.co/api/v2/pokemon/${id}`);
+  }
+
+  getAbilities(id: number): Observable<any> {
+    return this.http.get<any>(`https://pokeapi.co/api/v2/pokemon/${id}`);
+  }
+
 }

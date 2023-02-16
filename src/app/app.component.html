@@ -11,9 +11,8 @@
 
   <ul class="grid-container">
     <div *ngFor="let pokemon of pokemons" class="grid-item">
-      <img src="/assets/images/poke.jpeg" alt="pokemon picture" width="150" height="150"  />
+      <img (click)="viewPokemon(pokemon)" src="/assets/images/poke.jpeg" alt="pokemon picture" width="150" height="150"  />
       <a [routerLink]="['/pokemon', pokemon.id]" (click)="viewPokemon(pokemon)">{{ pokemon.name }}</a>
-
     </div>
   </ul>
 
