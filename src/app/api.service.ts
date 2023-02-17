@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { lastValueFrom } from 'rxjs';
+import {lastValueFrom, Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,21 +13,31 @@ export class ApiService {
    * @param offset how many records to skip
    * @param limit how many records to return
    * @returns list of pokemons
-   * 
+   *
    * @url https://pokeapi.co/docs/v2#resource-listspagination-section
    */
-  get(offset = 20, limit = 20) {
-    return lastValueFrom(this.http.get(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`));
+  get(page = 1, limit = 6) {
+    const offset = (page - 1) * limit;
+    return this.http.get(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`);
   }
 
   /**
    * Fetch a single pokemon from API
    * @param id id or name of the pokemon
    * @returns pokemon
-   * 
+   *
    * @url https://pokeapi.co/docs/v2#pokemon
    */
-  getOne(id: number | string) {
-    return lastValueFrom(this.http.get(`https://pokeapi.co/api/v2/pokemon/${id}`));
+  getOne(id: number | string): Observable<any>{
+    return this.http.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
   }
+
+  getMoves(id: number): Observable<any> {
+    return this.http.get<any>(`https://pokeapi.co/api/v2/pokemon/${id}`);
+  }
+
+  getAbilities(id: number): Observable<any> {
+    return this.http.get<any>(`https://pokeapi.co/api/v2/pokemon/${id}`);
+  }
+
 }
