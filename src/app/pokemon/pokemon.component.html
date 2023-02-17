@@ -1,7 +1,9 @@
 <div style="text-align: center;">
-  <h2>{{ pokemon.name | titlecase }}</h2>
+  <h1>{{ pokemon.name | titlecase }}</h1>
   <img [src]="pokemon.imgUrl" [alt]="pokemon.name + ' picture'" width="150" height="150" />
-  <p style="color: #555555;">Height: {{ pokemon.height }}</p>
+
+  <h3>Height:</h3>
+  <p style="color: #555555;">{{ pokemon.height }}</p>
 
   <h3>Types:</h3>
   <ul class = "pokemon-details">
@@ -12,5 +14,8 @@
   <ul class = "pokemon-details">
     <li *ngFor="let ability of pokemon.abilities">{{ ability.replace('-', ' ') | titlecase }}</li>
   </ul>
+
+  <button routerLink="/">Pokemons List</button>
+
 
 </div>

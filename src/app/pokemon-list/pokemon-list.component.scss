@@ -1,0 +1,45 @@
+.grid-container {
+  text-transform: capitalize;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 10px;
+  align-content: center;
+  margin-right: 40px;
+}
+
+.grid-item {
+  background-color: lightgray;
+  padding: 10px;
+  width: 190px;
+  height: 190px;
+  float: left;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  display: inline-block;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+
+.pokemon-info {
+  text-transform: capitalize;
+  text-align: center;
+}
+
+button {
+
+  background-color: #555;
+  color: #fff;
+  width: 120px;
+  height: 50px;
+  border-radius: 5px;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #3e8e41;
+}
