@@ -42,12 +42,10 @@ export class PokemonComponent implements OnInit {
         this.pokemon.imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${params['id']}.png`;
         //this.pokemon.moves = result.moves.map((move : any) => move.move.name);
         this.pokemon.abilities = result.abilities.map((ability: any) => ability.ability.name);
+        this.pokemon.types = result.types.map((type : any) => type.type.name);
       });
     });
   }
 
-  viewPokemon(pokemon: any) {
-    this.router.navigate([`/pokemon/${pokemon.id}`]);
-  }
 
 }

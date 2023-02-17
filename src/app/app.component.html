@@ -2,7 +2,7 @@
 <h1 style="text-align: center;">{{ title }}</h1>
 
 <div style="text-align: center;">
-  <button (click)="goToPage(page - 1)">Previous</button>
+  <button [disabled]="page === 1" (click)="goToPage(page - 1)">Previous</button>
   &nbsp;
   <button (click)="goToPage(page + 1)">Next</button>
 </div>
